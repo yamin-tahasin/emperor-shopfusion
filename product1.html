@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product 1 Details - Emperor ShopFusion</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    header {
+      background-color: #2e3b4e;
+      color: white;
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 3px solid #00bfff;
+    }
+
+    .site-name {
+      font-size: 24px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: white;
+    }
+
+    .product-container {
+      width: 85%;
+      margin: 20px auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    .product-image {
+      width: 45%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .product-image img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+    }
+
+    .product-image img:hover {
+      transform: scale(1.05) rotate(2deg);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .product-gallery {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+      justify-content: center;
+    }
+
+    .product-gallery img {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.4s ease, border 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .product-gallery img:hover {
+      transform: scale(1.15) rotate(5deg);
+      border: 2px solid #00bfff;
+    }
+
+    .product-details {
+      width: 45%;
+    }
+
+    .product-details h1 {
+      font-size: 32px;
+      color: #333;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .product-details p {
+      font-size: 18px;
+      color: #555;
+    }
+
+    .features {
+      font-size: 18px;
+      color: #333;
+      margin-top: 20px;
+    }
+
+    .price {
+      font-size: 24px;
+      color: #ff4500;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .buy-btn {
+      background-color: #00bfff;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    .buy-btn:hover {
+      background-color: #007bb5;
+    }
+
+    .share-btn {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      margin-left: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .share-btn:hover {
+      background-color: #45a049;
+    }
+
+    .rating {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #555;
+      display: flex;
+      align-items: center;
+      animation: fadeIn 1s ease-in-out;
+      cursor: pointer;
+    }
+
+    .rating span {
+      color: #ffb800;
+      margin-right: 10px;
+    }
+
+    .rating-info {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #555;
+    }
+
+    .order-info {
+      margin-top: 15px;
+      font-size: 16px;
+      color: #555;
+      font-weight: bold;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      animation: fadeInPopup 0.5s ease-in-out;
+    }
+
+    .popup-content {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      width: 80%;
+      max-width: 400px;
+      transform: translateY(-20px);
+      animation: slideInPopup 0.5s ease-in-out forwards;
+    }
+
+    .popup button {
+      background-color: #ff4500;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .popup button:hover {
+      background-color: #d43900;
+    }
+
+    .contact-popup {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      z-index: 999;
+      text-align: center;
+      animation: slideInPopup 0.5s ease-in-out;
+    }
+
+    .contact-popup h2 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .contact-popup button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin: 5px 0;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #ffffff;
+      color: #333;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .contact-popup button.facebook {
+      background-color: #3b5998;
+      color: white;
+    }
+
+    .contact-popup button.whatsapp {
+      background-color: #25d366;
+      color: white;
+    }
+
+    .highlight {
+      color: #ff4500;
+      font-weight: bold;
+    }
+
+    .comment-section {
+      margin: 20px auto;
+      width: 85%;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .comment-section h3 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .comment-box {
+      width: 100%;
+      height: 100px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .submit-comment {
+      background-color: #00bfff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-comment:hover {
+      background-color: #007bb5;
+    }
+
+    .comments-list {
+      margin-top: 20px;
+    }
+
+    .comment-item {
+      padding: 15px;
+      background-color: #f0f0f0;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .comment-item p {
+      font-size: 16px;
+      color: #555;
+    }
+
+    /* Footer Styles (Same as Homepage) */
+    footer {
+      background-color: #111;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      position: relative;
+      width: 100%;
+      animation: slideUp 1s ease-in-out;
+    }
+
+    footer h3 {
+      font-size: 20px;
+      color: #00bfff;
+      margin-bottom: 15px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    footer p, footer a {
+      font-size: 16px;
+      color: #ddd;
+      margin-bottom: 10px;
+      transition: color 0.3s ease;
+    }
+
+    footer a {
+      color: #00ffcc;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: #00bfff;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 20px;
+    }
+
+    .footer-section {
+      flex: 1;
+      min-width: 250px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .social-links a {
+      font-size: 24px;
+      color: #ddd;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .social-links a:hover {
+      transform: scale(1.2);
+      color: #00bfff;
+    }
+
+    .copyright {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #888;
+      border-top: 1px solid #333;
+      padding-top: 15px;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      0% { transform: translateY(50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeInPopup {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes slideInPopup {
+      0% { transform: translateY(-20px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="../index.html" class="site-name">Emperor ShopFusion</a>
+  </header>
+
+  <div class="product-container">
+    <div class="product-image">
+      <img id="main-image" src="image/prod1_1.webp" alt="Forshining Luxury Mechanical Watch">
+      <div class="product-gallery">
+        <img src="image/prod1_1.webp" alt="Forshining Luxury Mechanical Watch" onclick="changeImage('image/prod1_1.webp')">
+        <img src="image/prod1_2.webp" alt="Forshining Luxury Mechanical Watch" onclick="changeImage('image/prod1_2.webp')">
+        <img src="image/prod1_3.webp" alt="Forshining Luxury Mechanical Watch" onclick="changeImage('image/prod1_3.webp')">
+      </div>
+    </div>
+
+    <div class="product-details">
+      <h1>Forshining Luxury Mechanical Watch</h1>
+      <p><strong>Description:</strong> This luxury mechanical watch is designed to give you the perfect blend of style and precision. A true masterpiece for collectors and fashion enthusiasts alike.</p>
+
+      <div class="features">
+        <h3>Features:</h3>
+        <ul>
+          <li>High-quality stainless steel body</li>
+          <li>Water-resistant</li>
+          <li>Elegant design</li>
+        </ul>
+      </div>
+
+      <p><del>৳3427</del> <span class="price">৳2399</span></p>
+
+      <button class="buy-btn" onclick="showContactPopup()">Buy Now</button>
+      <button class="share-btn" onclick="shareProduct()">Share</button>
+
+      <div class="rating" onclick="openRatingPopup()">
+        <span>⭐⭐⭐⭐⭐</span> 4.6/5
+      </div>
+      <div class="rating-info">
+        <p>So far 91 sales have been made.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup" id="rating-popup">
+    <div class="popup-content">
+      <h2>Please purchase the product before rating!</h2>
+      <button onclick="closePopup()">Close</button>
+    </div>
+  </div>
+
+  <div class="contact-popup" id="contact-popup">
+    <h2>অর্ডার করতে <span class="highlight">ফেসবুক বা ওয়াটসঅ্যাপ</span> এ মেসেজ করুন</h2>
+    <button class="facebook" onclick="window.open('https://www.facebook.com/EmperorShopFusion', '_blank')">
+      Facebook: Chat with us
+    </button>
+    <button class="whatsapp" onclick="window.open('https://wa.me/8801761794588', '_blank')">
+      WhatsApp: Chat with us (Fastest)
+    </button>
+  </div>
+
+  <div class="comment-section">
+    <h3>Have any questions or comments about this product?</h3>
+    <textarea rows="4" placeholder="Leave your comment or question here..." style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;"></textarea>
+    <button style="background-color: #00bfff; color: white; padding: 12px 20px; border-radius: 8px; font-weight: bold; margin-top: 10px; cursor: pointer;">Submit</button>
+  </div>
+
+  <!-- Footer (Same as Homepage) -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <p>📱 <strong>WhatsApp:</strong> <a href="https://wa.me/8801761794588" target="_blank">+880 176179-4588</a></p>
+        <p>📧 <strong>Email:</strong> <a href="mailto:rec.sayfullah.yt@gmail.com">rec.sayfullah.yt@gmail.com</a></p>
+      </div>
+      <div class="footer-section">
+        <h3>About Emperor ShopFusion</h3>
+        <p>...</p>
+      </div>
+      <div class="footer-section">
+        <h3>Follow Us</h3>
+        <div class="social-links">
+          <a href="https://www.facebook.com/EmperorShopFusion" target="_blank">🟦</a>
+          <a href="https://www.instagram.com" target="_blank">🟪</a>
+          <a href="https://www.youtube.com" target="_blank">🟥</a>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      © 2025 Emperor ShopFusion. All Rights Reserved.
+    </div>
+  </footer>
+
+  <script>
+    function changeImage(imageSrc) {
+      document.getElementById('main-image').src = imageSrc;
+    }
+
+    function showContactPopup() {
+      document.getElementById('contact-popup').style.display = 'block';
+    }
+
+    function openRatingPopup() {
+      document.getElementById('rating-popup').style.display = 'flex';
+    }
+
+    function closePopup() {
+      document.getElementById('rating-popup').style.display = 'none';
+    }
+
+    function shareProduct() {
+      const url = window.location.href;
+      const text = "Check out this amazing product: Forshining Luxury Mechanical Watch!";
+      if (navigator.share) {
+        navigator.share({
+          title: 'Forshining Luxury Mechanical Watch',
+          text: text,
+          url: url
+        }).catch(err => console.log('Error sharing:', err));
+      } else {
+        // Fallback for browsers that don't support Web Share API
+        alert('Share this link: ' + url);
+      }
+    }
+
+    window.onclick = function(event) {
+      if (event.target == document.getElementById('rating-popup')) {
+        document.getElementById('rating-popup').style.display = 'none';
+      }
+    };
+  </script>
+
+</body>
+</html>

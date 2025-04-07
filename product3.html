@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product 1 Details - Emperor ShopFusion</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    header {
+      background-color: #2e3b4e;
+      color: white;
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 3px solid #00bfff;
+    }
+
+    .site-name {
+      font-size: 24px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: white;
+    }
+
+    .product-container {
+      width: 85%;
+      margin: 20px auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    .product-image {
+      width: 45%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .product-image img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .product-image img:hover {
+      transform: scale(1.05);
+    }
+
+    .product-gallery {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+      justify-content: center;
+    }
+
+    .product-gallery img {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .product-gallery img:hover {
+      transform: scale(1.2);
+    }
+
+    .product-details {
+      width: 45%;
+    }
+
+    .product-details h1 {
+      font-size: 32px;
+      color: #333;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .product-details p {
+      font-size: 18px;
+      color: #555;
+    }
+
+    .features {
+      font-size: 18px;
+      color: #333;
+      margin-top: 20px;
+    }
+
+    .price {
+      font-size: 24px;
+      color: #ff4500;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .buy-btn {
+      background-color: #00bfff;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    .buy-btn:hover {
+      background-color: #007bb5;
+    }
+
+    .rating {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #555;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .rating span {
+      color: #ffb800;
+      margin-right: 10px;
+    }
+
+    .order-info {
+      margin-top: 15px;
+      font-size: 16px;
+      color: #555;
+      font-weight: bold;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .popup-content {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      width: 80%;
+      max-width: 400px;
+    }
+
+    .popup button {
+      background-color: #ff4500;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .popup button:hover {
+      background-color: #d43900;
+    }
+
+    .contact-popup {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      z-index: 999;
+      text-align: center;
+    }
+
+    .contact-popup h2 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .contact-popup button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin: 5px 0;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #ffffff;
+      color: #333;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .contact-popup button.facebook {
+      background-color: #3b5998;
+      color: white;
+    }
+
+    .contact-popup button.whatsapp {
+      background-color: #25d366;
+      color: white;
+    }
+
+    .highlight {
+      color: #ff4500;
+      font-weight: bold;
+    }
+
+    .comment-section {
+      margin-top: 40px;
+    }
+
+    .comment-section h2 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .comment-box {
+      width: 100%;
+      height: 100px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .submit-comment {
+      background-color: #00bfff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-comment:hover {
+      background-color: #007bb5;
+    }
+
+    .comments-list {
+      margin-top: 20px;
+    }
+
+    .comment-item {
+      padding: 15px;
+      background-color: #f0f0f0;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .comment-item p {
+      font-size: 16px;
+      color: #555;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="../index.html" class="site-name">Emperor ShopFusion</a>
+  </header>
+
+  <div class="product-container">
+    <div class="product-image">
+      <img id="main-image" src="image/prod3_1.webp" alt="Boya M1 Microphone">
+      <div class="product-gallery">
+        <img src="image/prod3_1.webp" alt="Boya M1" onclick="changeImage('image/prod3_1.webp')">
+        <img src="image/prod3_2.webp" alt="Boya M1" onclick="changeImage('image/prod3_2.webp')">
+        <img src="image/prod3_3.webp" alt="Boya M1" onclick="changeImage('image/prod3_3.webp')">
+      </div>
+    </div>
+
+    <div class="product-details">
+      <h1>Boya M1 Microphone  Compact & Professional-Grade Audio Capture</h1>
+      <p><strong>Description:</strong> The Boya M1 is an omnidirectional lavalier microphone designed for crystal-clear audio recording. Its ultra-compact design clips discreetly to clothing, making it ideal for interviews, vlogging, and content creation. With a wide frequency response (20Hz 20kHz), it captures rich, balanced sound while reducing background noise. The 3.5mm TRS connector ensures plug-and-play compatibility with smartphones, DSLRs, and recording devices, while the 2-meter cable provides flexibility in positioning.</p>
+
+      <div class="features">
+        <h3>Features:</h3>
+        <ul>
+          <li>Perfect for YouTube, podcasts, weddings, and filmmaking</li>
+          <li>Minimizes ambient interference for studio-quality audio</li>
+          <li>3.5mm to 3.5mm audio cable</li>
+        </ul>
+      </div>
+
+      <p><del>৳749</del> <span class="price">৳599</span></p>
+
+      <button class="buy-btn" onclick="showContactPopup()">Buy Now</button>
+
+      <div class="rating" onclick="openRatingPopup()">
+        <span id="rating-stars">⭐⭐⭐⭐</span> 4.4/5 (51 people have purchased this product)
+      </div>
+    </div>
+  </div>
+
+  <div class="popup" id="rating-popup">
+    <div class="popup-content">
+      <h2>Please purchase the product before rating!</h2>
+      <button onclick="closePopup()">Close</button>
+    </div>
+  </div>
+
+  <div class="contact-popup" id="contact-popup">
+    <h2>অর্ডার করতে <span class="highlight">ফেসবুক বা ওয়াটসঅ্যাপ</span> এ মেসেজ করুন</h2>
+    <button class="facebook" onclick="window.open('https://www.facebook.com/EmperorShopFusion', '_blank')">
+      Facebook: Chat with us
+    </button>
+    <button class="whatsapp" onclick="window.open('https://wa.me/8801761794588', '_blank')">
+      WhatsApp: Chat with us (Fastest)
+    </button>
+  </div>
+
+  <div class="comment-section" style="margin: 20px auto; width: 85%; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+    <h3>Have any questions or comments about this product?</h3>
+    <textarea rows="4" placeholder="Leave your comment or question here..." style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;"></textarea>
+    <button style="background-color: #00bfff; color: white; padding: 12px 20px; border-radius: 8px; font-weight: bold; margin-top: 10px; cursor: pointer;">Submit</button>
+  </div>
+
+  <script>
+    function changeImage(imageSrc) {
+      document.getElementById('main-image').src = imageSrc;
+    }
+
+    function showContactPopup() {
+      document.getElementById('contact-popup').style.display = 'block';
+    }
+
+    function openRatingPopup() {
+      document.getElementById('rating-popup').style.display = 'flex';
+    }
+
+    function closePopup() {
+      document.getElementById('rating-popup').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      if (event.target == document.getElementById('rating-popup')) {
+        document.getElementById('rating-popup').style.display = 'none';
+      }
+    };
+  </script>
+
+</body>
+</html>
